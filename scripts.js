@@ -3,6 +3,7 @@ const contenedor = document.getElementById('contenedorDinamico');
 const cambiarContenidoBtn = document.getElementById('cambiarContenidoBtn');
 const crearElementoBtn = document.getElementById('crearElementoBtn');
 const cambiarEstiloBtn = document.getElementById('cambiarEstiloBtn');
+let estadoOriginal = true;
 
 cambiarContenidoBtn.addEventListener('click', function(){
     const parrafo = contenedor.querySelector('p'); //Aca accedemos una etiqueta que no tenga ID, directamente a traves del padre
@@ -30,10 +31,18 @@ crearElementoBtn.addEventListener('click', function() {
 cambiarEstiloBtn.addEventListener('click', function() {
 
 const parrafo = document.getElementsByTagName('p');
-
+if (estadoOriginal) {
   for (let i = 0; i < parrafo.length; i++) {
-    parrafo[i].style.backgroundColor = 'black';
-    parrafo[i].style.fontSize  = '20px';
-    parrafo[i].style.color  = 'white';
+    parrafo[i].classList.toggle('resaltado');
   }
-});
+     cambiarEstiloBtn.textContent = ('Regresar estilo Original');
+     estadoOriginal = false;
+  }
+  else{
+     for (let i = 0; i < parrafo.length; i++) {
+      parrafo[i].classList.remove('resaltado');
+     }
+     cambiarEstiloBtn.textContent = ('Cambiar Estilo');
+     estadoOriginal = true;
+  }
+} );
